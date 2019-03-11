@@ -17,15 +17,15 @@
 <div id="tabContent">
     <nav id="tabNav">
         <ul>
-            <li class="active"><a href="#tabCont01">button01</a></li>
-            <li><a href="#tabCont02">button02</a></li>
-            <li><a href="#tabCont03">button03</a></li>
+            <li class="active"><a href="javascript:;">button01</a></li>
+            <li><a href="javascript:;">button02</a></li>
+            <li><a href="javascript:;">button03</a></li>
         </ul>
     </nav>
     <div id="tabContentBox">
-        <div id="tabCont01" class="show">content01</div>
-        <div id="tabCont02">content02</div>
-        <div id="tabCont03">content03</div>
+        <div class="show">content01</div>
+        <div>content02</div>
+        <div>content03</div>
     </div>
 </div>
 ```
