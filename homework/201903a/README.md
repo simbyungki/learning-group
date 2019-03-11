@@ -14,15 +14,15 @@
 ***
 
 ```html
-<div id="tabContent">
-    <nav id="tabNav">
+<div class="tabContent">
+    <nav class="tabNav">
         <ul>
             <li class="active"><a href="javascript:;">button01</a></li>
             <li><a href="javascript:;">button02</a></li>
             <li><a href="javascript:;">button03</a></li>
         </ul>
     </nav>
-    <div id="tabContentBox">
+    <div class="tabContentBox">
         <div class="show">content01</div>
         <div>content02</div>
         <div>content03</div>
