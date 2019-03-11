@@ -28,9 +28,26 @@
         <div>content03</div>
     </div>
 </div>
+<div class="tabContent">
+    <nav class="tabNav">
+        <ul>
+            <li class="active"><a href="javascript:;">button01</a></li>
+            <li><a href="javascript:;">button02</a></li>
+            <li><a href="javascript:;">button03</a></li>
+            <li><a href="javascript:;">button04</a></li>
+        </ul>
+    </nav>
+    <div class="tabContentBox">
+        <div class="show">content01</div>
+        <div>content02</div>
+        <div>content03</div>
+        <div>content04</div>
+    </div>
+</div>
 ```
 
 ![탭UI설명](./201903a_.gif)  
+**동일페이지 내 재사용 구현을 위하여 우선 이미지내 id값 > class로 변경
 
 ***
 
