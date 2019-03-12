@@ -3,28 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>TAB UI</title>
+    <style>
+        * {margin:0; padding:0;}
+        ul, li {list-style:none;}
+        .tabContent {padding:15px;}
+        .tabNav ul {zoom:1;}
+        .tabNav ul:after {display:block; content:""; clear:both;}
+        .tabNav ul li {float:left; border:1px solid #999; border-left:0; border-bottom:0; box-sizing:border-box; transition:width .3s;}
+        .tabNav ul li:first-child {border-left:1px solid #999;}
+        .tabNav ul li a {display:block; padding:10px 20px; color:#444; font-size:14px; text-decoration:none; transition:all .2s;}
+        .tabNav ul li.active a {color:#fff; background:#444; transition:all .2s;}
+        .tabContentBox {padding:15px; min-height:200px; border:1px solid #999;}
+        .tabContentBox > div {display:none;}
+        .tabContentBox > div.show {display:block;}
+        @media all and (max-width: 640px) {
+            .tabNav ul li {width:20%; transition:width .3s;}
+            .tabNav ul li a {padding:15px 0; text-align:center;}
+        }
+    </style>
 </head>
 <body>
-<style>
-* {margin:0; padding:0;}
-ul, li {list-style:none;}
-.tabContent {padding:15px;}
-.tabNav ul {zoom:1;}
-.tabNav ul:after {display:block; content:""; clear:both;}
-.tabNav ul li {float:left; border:1px solid #999; border-left:0; border-bottom:0; box-sizing:border-box; transition:width .3s;}
-.tabNav ul li:first-child {border-left:1px solid #999;}
-.tabNav ul li a {display:block; padding:10px 20px; color:#444; font-size:14px; text-decoration:none; transition:all .2s;}
-.tabNav ul li.active a {color:#fff; background:#444; transition:all .2s;}
-.tabContentBox {padding:15px; min-height:200px; border:1px solid #999;}
-.tabContentBox > div {display:none;}
-.tabContentBox > div.show {display:block;}
-@media all and (max-width: 640px) {
-    .tabNav ul li {width:20%; transition:width .3s;}
-    .tabNav ul li a {padding:15px 0; text-align:center;}
-}
-</style>
     <div class="tabContent">
         <nav class="tabNav">
             <ul>
@@ -55,8 +55,6 @@ ul, li {list-style:none;}
             <div>content04</div>
         </div>
     </div>
-
-    
 <script>
 //Fn : 선택한 index 외 클래스 삭제, 선택한 index 에 클래스 추가
 function classControl(elem, idx, setClass){
@@ -74,11 +72,13 @@ function activeTabMenu(thisTabNavItems, thisTabContentItmes, clickedIdx){
 
 //Fn : 선택한 item의 부모의 자식 중 선택한 item의 index를 return > (stackoverflow 검색)
 function getThisIdx(elem) {
+    //type01
     //HTMLcollection > Array
     var items = [].slice.call(elem.parentNode.children);
     return items.indexOf(elem);
 
     //or 
+    //type02
     //return Array.prototype.indexOf.call(arr, elem);
 }
 
@@ -98,11 +98,11 @@ function init(){
     });
 }
 init();
-
-
-
 </script>
-<!-- 
+
+
+<!--
+
     'use strict'
     엄격한 javascript모드,
     - 더 많은 예외를 발생시킴 (상대적으로 안전하지 않은 액션 등을 방지)
@@ -113,12 +113,29 @@ init();
     document.querySelectorAll = nodelist []
     document.getElementsByClassName = HTMLcollection []
     
-    IE에서는 array forEach문을 지원하지 않기때문에 Array.prototype.forEach.call
-    https://developer.mozilla.org/ko/docs/Web/API/NodeList#Example
-
+    @ IE에서는 array forEach문을 지원하지 않기때문에 
+    Array.prototype.forEach.call (https://developer.mozilla.org/ko/docs/Web/API/NodeList#Example)
     ele.addEventListener() 함수 등록할 시 매개변수를 넘기려면 익명함수를 사용해야한다.
     ele.addEventListener('click', fn(foo)) => (X)
     ele.addEventListener('click', function(){fn(foo)}) => (O)
+
+    @ item 중 클릭한 item의 index를 찾으면 전체 목록을 찾기때문에 
+    클릭한 item의 해당하는 세트에서 클릭한 item의 index 찾아야 됨
+    
+    @ children 선택자는 HTMLcollection을 반환
+    [].slice.call()메소드로 HTMLcollection을 일반 배열로 변경가능
+    Array의 indexOf()메소드를 IE에서 사용 불가 > indexOf를 prototype을 통해 제작
+    if(!Array.indexOf){
+        Array.prototype.indexOf = function (obj, start) {
+            for (var i = (start || 0); i < this.length; i++) {
+                if (this[i] == obj) {
+                    return i;
+                }
+            }
+            return -i;
+        }
+    }
+
 -->
 </body>
 </html>
