@@ -7,7 +7,7 @@
 1. **완료기한 > 2019.03.20**
 2. HTML, CSS는 아래 예시 코드를 사용한다. (코드 비교 수월)  
 3. 행운의 번호 생성하기 버튼을 클릭하면 1 ~ 46 숫자 중 랜덤으로 6개의 숫자가 li에 담겨 화면에 노출된다.  
-4. 노출형태(HTML)는 아래 예제코드 "<li>..</li>" 참고
+4. 노출형태(HTML)는 아래 예제코드 &lt;li&gt;&lt;/li&gt; 참고
 5. 1개의 그룹 (6개의 숫자) 내 같은 숫자가 존재할 수 없고,  
   매 그룹 생성 시 마다 배열 > 배열 형태로 담는다. (아래 예시 참고)
 6. 매 버튼 클릭 > 리스트 추가할때마다 앞에 넘버 +1 
@@ -46,7 +46,7 @@ ul, li {list-style:none;}
     <button type="button" class="btnMakeNumber">행운의 번호 생성하기</button>
     <ul class="numberList">
         <!-- 
-            여기에 생성된 번호가 아래의 양식으로 출력된다.
+            생성된 번호가 아래의 양식으로 출력된다.
             <li>1. <strong>5</strong>, <strong>6</strong>, <strong>7</strong>, <strong>8</strong>, <strong>22</strong>, <strong>45</strong></li>
             <li>2. <strong>4</strong>, <strong>2</strong>, <strong>6</strong>, <strong>45</strong>, <strong>23</strong>, <strong>46</strong></li>
         -->
