@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <title>TAB UI</title>
+</head>
+<body>
+<style>
+* {margin:0; padding:0;}
+ul, li {list-style:none;}
+.tabContent {padding:15px;}
+.tabNav ul {zoom:1;}
+.tabNav ul:after {display:block; content:""; clear:both;}
+.tabNav ul li {float:left; border:1px solid #999; border-left:0; border-bottom:0; box-sizing:border-box; transition:width .3s;}
+.tabNav ul li:first-child {border-left:1px solid #999;}
+.tabNav ul li a {display:block; padding:10px 20px; color:#444; font-size:14px; text-decoration:none; transition:all .2s;}
+.tabNav ul li.active a {color:#fff; background:#444; transition:all .2s;}
+.tabContentBox {padding:15px; min-height:200px; border:1px solid #999;}
+.tabContentBox > div {display:none;}
+.tabContentBox > div.show {display:block;}
+@media all and (max-width: 640px) {
+    .tabNav ul li {width:20%; transition:width .3s;}
+    .tabNav ul li a {padding:15px 0; text-align:center;}
+}
+</style>
+    <div class="tabContent">
+        <nav class="tabNav">
+            <ul>
+                <li class="active"><a href="javascript:;">button01</a></li>
+                <li><a href="javascript:;">button02</a></li>
+                <li><a href="javascript:;">button03</a></li>
+            </ul>
+        </nav>
+        <div class="tabContentBox">
+            <div class="show">content01</div>
+            <div>content02</div>
+            <div>content03</div>
+        </div>
+    </div>
+    <div class="tabContent">
+        <nav class="tabNav">
+            <ul>
+                <li class="active"><a href="javascript:;">button01</a></li>
+                <li><a href="javascript:;">button02</a></li>
+                <li><a href="javascript:;">button03</a></li>
+                <li><a href="javascript:;">button04</a></li>
+            </ul>
+        </nav>
+        <div class="tabContentBox">
+            <div class="show">content01</div>
+            <div>content02</div>
+            <div>content03</div>
+            <div>content04</div>
+        </div>
+    </div>
+
+    
+<script>
+//Fn : 선택한 index 외 클래스 삭제, 선택한 index 에 클래스 추가
+function classControl(elem, idx, setClass){
+    for(var i=0; i < elem.length; i++){
+        elem[i].className = '';
+    }
+    elem[idx].className = setClass;
+}
+
+//Fn : 선택한 탭메뉴, 탭콘텐츠 활성화
+function activeTabMenu(thisTabNavItems, thisTabContentItmes, clickedIdx){
+    classControl(thisTabNavItems, clickedIdx, 'active');
+    classControl(thisTabContentItmes, clickedIdx, 'show');
+}
+
+//Fn : 선택한 item의 부모의 자식 중 선택한 item의 index를 return > (stackoverflow 검색)
+function getThisIdx(elem) {
+    //HTMLcollection > Array
+    var items = [].slice.call(elem.parentNode.children);
+    return items.indexOf(elem);
+
+    //or 
+    //return Array.prototype.indexOf.call(arr, elem);
+}
+
+//Init
+function init(){
+
+    'use strict';
+
+    var navItems = document.querySelectorAll('.tabNav li');
+    Array.prototype.forEach.call(navItems, function(tabButton) {
+        tabButton.addEventListener('click', function(){
+            var thisTabNavItems = this.parentNode.querySelectorAll('li');
+            var thisTabContentItmes = this.parentNode.parentNode.nextElementSibling.children;
+            var thisIdx = getThisIdx(this);
+            activeTabMenu(thisTabNavItems, thisTabContentItmes, thisIdx);
+        });
+    });
+}
+init();
+
+
+
+</script>
+<!-- 
+    'use strict'
+    엄격한 javascript모드,
+    - 더 많은 예외를 발생시킴 (상대적으로 안전하지 않은 액션 등을 방지)
+    - 제대로 고려되지 않은 기능들을 비활성화
+    - 특정 함수 내에서만도 사용
+    https://blog.aliencube.org/ko/2014/01/02/reasons-behind-using-strict-mode-while-coding-javascript/
+
+    document.querySelectorAll = nodelist []
+    document.getElementsByClassName = HTMLcollection []
+    
+    IE에서는 array forEach문을 지원하지 않기때문에 Array.prototype.forEach.call
+    https://developer.mozilla.org/ko/docs/Web/API/NodeList#Example
+
+    ele.addEventListener() 함수 등록할 시 매개변수를 넘기려면 익명함수를 사용해야한다.
+    ele.addEventListener('click', fn(foo)) => (X)
+    ele.addEventListener('click', function(){fn(foo)}) => (O)
+-->
+</body>
+</html>
