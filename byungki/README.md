@@ -1,3 +1,3 @@
 # learning-group
-## vanillaJS Mini Projects
-- [탭메뉴 만들기](./201903a/default.html)
+## vanillaJS로 만들어보기
+- [web UI 탭메뉴](./201903a/default.html)
