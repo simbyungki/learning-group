@@ -65,9 +65,9 @@ function classControl(elem, idx, setClass){
 }
 
 //Fn : 선택한 탭메뉴, 탭콘텐츠 활성화
-function activeTabMenu(thisTabNavItems, thisTabContentItmes, clickedIdx){
+function activeTabMenu(thisTabNavItems, thisTabContentItems, clickedIdx){
     classControl(thisTabNavItems, clickedIdx, 'active');
-    classControl(thisTabContentItmes, clickedIdx, 'show');
+    classControl(thisTabContentItems, clickedIdx, 'show');
 }
 
 //Fn : 선택한 item의 부모의 자식 중 선택한 item의 index를 return
@@ -91,9 +91,9 @@ function init(){
     Array.prototype.forEach.call(navItems, function(tabButton) {
         tabButton.addEventListener('click', function(){
             var thisTabNavItems = this.parentNode.querySelectorAll('li');
-            var thisTabContentItmes = this.parentNode.parentNode.nextElementSibling.children;
+            var thisTabContentItems = this.parentNode.parentNode.nextElementSibling.children;
             var thisIdx = getThisIdx(this);
-            activeTabMenu(thisTabNavItems, thisTabContentItmes, thisIdx);
+            activeTabMenu(thisTabNavItems, thisTabContentItems, thisIdx);
         });
     });
 }
