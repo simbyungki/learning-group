@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>201903_tab</title>
+    <link rel="stylesheet" href="../css/reset.css">
+
+    <style>
+        .tabContent {width:100%; padding:10px; box-sizing:border-box;}
+        .tabContent + .tabContent {margin-top:80px;}
+        
+        .tabContent .tabNav {width:80%; margin-bottom:10px;}
+        .tabContent .tabNav ul {overflow:hidden; padding-left:0;}
+        .tabContent .tabNav ul li {float:left; width:33.33%; box-sizing:border-box;}
+        .tabContent .tabNav ul li + li {padding:0 10px;}
+        .tabContent .tabNav.type2 ul li {width:25%;}
+        .tabContent .tabNav ul li a {display:block; height:50px; line-height:50px; text-align:center;
+                                     border:1px solid #666;}
+        .tabContent .tabNav ul li.active a {background-color:#666; color:#fff}
+                            
+        .tabContentBox {width:100%; height:200px; border:1px solid #666;}
+        .tabContentBox > div {display:none; height:100%; padding:10px; box-sizing:border-box;}
+        .tabContentBox > div.show {display:block;}
+    </style>
+</head>
+<body>
+    <div class="tabContent">
+        <nav class="tabNav">
+            <ul>
+                <li class="active"><a href="javascript:;">button01</a></li>
+                <li><a href="javascript:;">button02</a></li>
+                <li><a href="javascript:;">button03</a></li>
+            </ul>
+        </nav>
+        <div class="tabContentBox">
+            <div class="show">content01</div>
+            <div>content02</div>
+            <div>content03</div>
+        </div>
+    </div>
+    <!-- <div class="tabContent">
+        <nav class="tabNav type2">
+            <ul>
+                <li class="active"><a href="javascript:;">button01</a></li>
+                <li><a href="javascript:;">button02</a></li>
+                <li><a href="javascript:;">button03</a></li>
+                <li><a href="javascript:;">button04</a></li>
+            </ul>
+        </nav>
+        <div class="tabContentBox">
+            <div class="show">content01</div>
+            <div>content02</div>
+            <div>content03</div>
+            <div>content04</div>
+        </div>  
+    </div> -->
+
+    <script>
+        var tabMenu = document.querySelectorAll('.tabNav ul li');
+
+        function tabClick(idx) {
+            tabMenu[idx].addEventListener('click',function(){
+                var clList = this.className;    //className : 클래스 리스트
+                console.log(tabMenu[idx].parentNode.parentNode.nextSibling);
+
+                /* 탭 클래스 초기화 */
+                for(var j = 0; j < tabMenu.length; j++){
+                    tabMenu[j].classList = clList.replace(/active/g, ''); //교체할 클래스 위치에 따라 정규식 수정 필요, 정규식은 구글링하자
+                    //tabCont[j].classList = clList.replace(/show/g, '');                    
+                }
+                /* //탭 클래스 초기화 */
+
+                tabMenu[idx].className += 'active'; //해당 li에 클래스 추가
+                //tabCont[idx].className += 'show';   
+            });
+        }
+
+        for (var i = 0; i < tabMenu.length; i++){
+            tabClick(i);
+         }
+
+         //다음 할 일 : 재사용 가능하게 하기
+
+         
+    </script>
+</body>
+</html>
