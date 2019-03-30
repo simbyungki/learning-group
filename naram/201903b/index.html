@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/reset.css">
+    <title>201903b</title>
+</head>
+<body>
+    <style>
+        .faqBox {margin:10px auto; max-width:640px; border:1px solid #ccc;}
+        .faqBox li {border-top:1px solid #ccc;}
+        .faqBox li:first-child {border-top:0;}
+        .faqBox li .question {display:block; padding:15px;}
+        .faqBox li .answer {height:0; position:relative; padding:0; overflow:hidden;}
+        .faqBox li.active .question {color:#fff; background:#333;}
+        .faqBox li.active .answer {padding:15px; height:auto; border-top:1px solid #ccc;}
+    </style>
+    <div class="faqBox">
+        <ul class="list">
+            <li class="active">
+                <a href="javascript:;" class="question">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent du</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Aliquam mauris arcu, blandit quis tempus et, dapibus id nulla. M</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Phasellus eu aliquam elit. Pellentesque habitant morbi tristiqu</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Donec gravida vel magna a mollis. Nulla et mauris ut leo m</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var acco = document.querySelectorAll('.faqBox .list li');
+        var key = document.getElementsByClassName('question');
+
+        for(var i = 0; i < key.length; i++){
+            key[i].addEventListener('click', function(){
+                if(this.parentElement.className != ''){
+                    this.parentElement.className = this.parentElement.className.replace(/active/g, '');
+                }else {
+                    for(var j=0; j < key.length; j++){
+                        acco[j].className = acco[j].className.replace(/active/g, '');
+                    }
+                    this.parentElement.className += 'active';
+                }
+            })
+        }
+    </script>
+</body>
+</html>
