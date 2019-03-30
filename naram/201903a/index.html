@@ -35,12 +35,13 @@
             </ul>
         </nav>
         <div class="tabContentBox">
-            <div class="show">content01</div>
-            <div>content02</div>
-            <div>content03</div>
+            <div class="show">content1-01</div>
+            <div>content1-02</div>
+            <div>content1-03</div>
         </div>
     </div>
-    <!-- <div class="tabContent">
+    
+    <div class="tabContent">
         <nav class="tabNav type2">
             <ul>
                 <li class="active"><a href="javascript:;">button01</a></li>
@@ -50,40 +51,38 @@
             </ul>
         </nav>
         <div class="tabContentBox">
-            <div class="show">content01</div>
-            <div>content02</div>
-            <div>content03</div>
-            <div>content04</div>
-        </div>  
-    </div> -->
+            <div class="show">content2-01</div>
+            <div>content2-02</div>
+            <div>content2-03</div>
+            <div>content2-04</div>
+        </div>
+    </div>
 
     <script>
-        var tabMenu = document.querySelectorAll('.tabNav ul li');
+        var allTab =document.querySelectorAll('.tabNav ul li');
+        var allCont =document.querySelectorAll('.tabContentBox div');
 
         function tabClick(idx) {
-            tabMenu[idx].addEventListener('click',function(){
+            allTab[idx].addEventListener('click',function(){
                 var clList = this.className;    //className : 클래스 리스트
-                console.log(tabMenu[idx].parentNode.parentNode.nextSibling);
+                var tab = this.parentElement.querySelectorAll('li');    //내가 클릭한 li 선언
+                var tabCont = this.parentElement.parentElement.parentElement.querySelectorAll('.tabContentBox div');    //내가 클릭한 탭의 관련 콘텐츠들만 선언
 
                 /* 탭 클래스 초기화 */
-                for(var j = 0; j < tabMenu.length; j++){
-                    tabMenu[j].classList = clList.replace(/active/g, ''); //교체할 클래스 위치에 따라 정규식 수정 필요, 정규식은 구글링하자
-                    //tabCont[j].classList = clList.replace(/show/g, '');                    
+                for(var j = 0; j < tab.length; j++){
+                    tab[j].classList = clList.replace(/active/g, '');   //교체할 클래스 위치에 따라 정규식 수정 필요, 정규식은 구글링하자
+                    tabCont[j].classList = clList.replace(/show/g, '');      
                 }
                 /* //탭 클래스 초기화 */
 
-                tabMenu[idx].className += 'active'; //해당 li에 클래스 추가
-                //tabCont[idx].className += 'show';   
+                allTab[idx].className += 'active';  //클릭 li에 클래스 추가
+                allCont[idx].className += 'show';   //해당 div에 클래스 추가
             });
         }
 
-        for (var i = 0; i < tabMenu.length; i++){
+        for (var i = 0; i < allTab.length; i++){    //document에 있는 모든 탭메뉴 버튼에 자신의 index를 파라미터로 함수 선언
             tabClick(i);
          }
-
-         //다음 할 일 : 재사용 가능하게 하기
-
-         
     </script>
 </body>
 </html>
