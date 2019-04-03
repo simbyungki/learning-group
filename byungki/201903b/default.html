@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <title>FAQ</title>
+</head>
+<body>
+<style>
+* {margin:0; padding:0;}
+ul, li {list-style:none;}
+.faqBox {margin:10px auto; max-width:640px; border:1px solid #ccc;}
+.faqBox li {border-top:1px solid #ccc;}
+.faqBox li:first-child {border-top:0;}
+.faqBox li .question {display:block; padding:15px;}
+.faqBox li .answer {height:0; position:relative; padding:0; overflow:hidden;}
+.faqBox li.active .question {color:#fff; background:#333; transition:height 3s;}
+.faqBox li.active .answer {padding:15px; height:auto; border-top:1px solid #ccc; transition:height 3s;}
+</style>
+    <div class="faqBox">
+        <ul class="list">
+            <li class="active">
+                <a href="javascript:;" class="question">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent du</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Aliquam mauris arcu, blandit quis tempus et, dapibus id nulla. M</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Phasellus eu aliquam elit. Pellentesque habitant morbi tristiqu</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="javascript:;" class="question">
+                    <p>Donec gravida vel magna a mollis. Nulla et mauris ut leo m</p>
+                </a>
+                <div class="answer">
+                    <p>
+                        ligula et molestie consectetur, metus mi scelerisque sem, a lobortis eros metus sed ante. 
+                        Donec tincidunt rutrum ultrices. Quisque malesuada vel est a consectetur. Suspendisse mattis bibendum est, 
+                        non tincidunt massa dignissim eu. Sed nec posuere quam, ac condimentum lacus. Proin dapibus justo et varius congue. 
+                        Cras non posuere ipsum, eget tincidunt erat. Etiam non lorem feugiat, volutpat felis ut, consequat arcu. 
+                        Phasellus vel leo vulputate metus dignissim sollicitudin. 
+                        Morbi molestie viverra purus, a fringilla risus placerat et. Curabitur molestie magna et dui mollis venenatis.
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+<script>
+//Fn : 클래스 제거 및 부여
+function activeFaq(elem, idx, currIdx){
+    //현재 active된 row index와 비교
+    for(var i=0; i < elem.length; i++){
+        elem[i].className = '';
+    }
+    if(currIdx !== idx){
+        elem[idx].className = 'active';
+    }
+}
+
+//Fn : 선택한 item의 부모의 자식 중 선택한 item의 index return
+function getThisIdx(elem){
+    //HTMLcollection > Array
+    var items = [].slice.call(elem.parentNode.children);
+    console.log('click' , items.indexOf(document.querySelector('.active')));
+    return items.indexOf(elem);
+}
+
+//Fn : 현재 active된 row index return
+function getCurrentIdx(elem){
+    //HTMLcollection > Array
+    var items = [].slice.call(elem.parentNode.children);
+    console.log('curr' , items.indexOf(document.querySelector('.active')));
+    return items.indexOf(document.querySelector('.active'));
+}
+
+function init(){
+
+    'use strict'
+
+    var faqQuestionItem = document.querySelectorAll('.faqBox .list li');
+    var faqQuestionTargets = document.querySelectorAll('.faqBox .list li a');
+
+    Array.prototype.forEach.call(faqQuestionTargets, function(faqQuestion){
+        faqQuestion.addEventListener('click', function(){
+            var thisParentLi = this.parentNode;
+            var thisIdx = getThisIdx(thisParentLi);
+            var currentIdx = getCurrentIdx(thisParentLi);
+            activeFaq(faqQuestionItem, thisIdx, currentIdx);
+        });
+    });
+
+
+}
+init();
+</script>
+
+</body>
+</html>
