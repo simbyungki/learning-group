@@ -67,7 +67,7 @@
                 var clList = this.className;    //className : 클래스 리스트
                 var tab = this.parentElement.querySelectorAll('li');    //내가 클릭한 li 선언
                 var tabCont = this.parentElement.parentElement.parentElement.querySelectorAll('.tabContentBox div');    //내가 클릭한 탭의 관련 콘텐츠들만 선언
-
+                console.log(clList);
                 /* 탭 클래스 초기화 */
                 for(var j = 0; j < tab.length; j++){
                     tab[j].className = clList.replace(/active/g, '');   //교체할 클래스 위치에 따라 정규식 수정 필요, 정규식은 구글링하자
@@ -76,7 +76,7 @@
                 /* //탭 클래스 초기화 */
 
                 allTab[idx].className += 'active';  //클릭 li에 클래스 추가
-                allCont[idx].className += 'show';   //해당 div에 클래스 추가
+                allCont[idx].className += ' show';   //해당 div에 클래스 추가
             });
         }
 
