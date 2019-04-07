@@ -90,7 +90,7 @@
             key[i].addEventListener('click', function(){
                 if(this.parentElement.className != ''){
                     this.parentElement.className = this.parentElement.className.replace(/active/g, '');
-                }else {
+                }else { //클래스가 여러개일 경우?! - 20190407
                     for(var j=0; j < key.length; j++){
                         acco[j].className = acco[j].className.replace(/active/g, '');
                     }
