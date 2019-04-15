@@ -75,14 +75,23 @@
             return false;
         }
 
-        num.innerHTML = pushNum;
+        //num.innerHTML = pushNum;
 
-        // if(num.innerHTML > pushNum){
-        //     for(var i = 0; i <= num.innerHTML-pushNum; i++){
-        //         num.innerHTML -= 1;
-        //         console.log(num.innerHTML);
-        //     }
-        // }
+        if(num.innerHTML > pushNum){
+            var countNum = num.innerHTML - pushNum;            
+            count(countNum);
+        }
+    }
+
+    function count(countNum){
+        // setInterval(function(){
+        //     num.innerHTML -= 1;
+        //     num.innerHTML == num.innerHTML;
+        //     if(num.innerHTML == 0){
+        //         clearInterval(countNum);
+        //     };
+        // }, 500);
+        console.log(countNum);
     }
     </script>
 </body>
