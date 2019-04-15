@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/reset.css">
+    <title>201904a</title>
+    <style>
+    * {margin:0; padding:0;}
+    #numberCounterBox {margin:20px auto; padding:20px; width:100%; max-width:360px; text-align:center; border:4px solid #ccc; box-sizing:border-box;}
+    #numberCounterBox .inputNumber {margin:40px auto; width:300px; font-size:0;}
+    #numberCounterBox .inputNumber input {padding:0 10px; width:75%; height:50px; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; box-sizing:border-box;}
+    #numberCounterBox .inputNumber button {width:25%; height:50px; color:#fff; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; background:#222; box-sizing:border-box;}
+    #numberCounterBox .controlNumber {position:relative; margin:0 auto; width:300px; height:50px;}
+    #numberCounterBox .controlNumber .number {line-height:50px; font-size:40px;}
+    #numberCounterBox .controlNumber .btn {position:absolute; top:0; width:50px; height:50px; font-size:20px; border:3px solid #222; background:#fff;}
+    #numberCounterBox .controlNumber .btn.down {left:0;}
+    #numberCounterBox .controlNumber .btn.up {right:0;}
+    </style>
+</head>
+<body>
+    <div id="numberCounterBox">
+        <h1>counter</h1>
+        <div class="inputNumber">
+            <input type="number" id="pushNum" name="pushNum" placeholder="숫자를 입력해주세요.">
+            <button type="button" class="btnConfirm" onclick="pushNumber()">입력</button>
+        </div>
+        <div class="controlNumber">
+            <button type="button" class="btn down" onclick="changeNum();">▼</button>
+            <strong id="number" class="number">10</strong>
+            <button type="button" class="btn up" onclick="changeNum();">▲</button>
+        </div>
+    </div>
+
+    <script>
+    var num = document.getElementById('number');
+        
+    function changeNum(){        
+        var thisNum = Number(document.getElementById('number').innerText);
+        var thisClass = event.target.className;
+        var classAry = thisClass.split(" ");
+
+        for(var i = 0; i < classAry.length; i++){
+            if(classAry[i] == 'up'){
+                thisNum += 1;
+                if(thisNum > 15){
+                    alert('15보다 클 수 없습니다.');
+                }else{
+                    num.innerHTML = thisNum;
+                }
+            }else if(classAry[i] == 'down'){
+                thisNum -= 1;
+                if(thisNum < 0){
+                    alert('0보다 작을 수 없습니다.');
+                }else {
+                    num.innerHTML = thisNum;   
+                }
+            }
+        }
+    }
+
+    function pushNumber(){
+        var pushInput = document.getElementById('pushNum');
+        var pushNum = Number(document.getElementById('pushNum').value);
+        if(pushNum < 0){
+            alert('0보다 작을 수 없습니다.');
+            pushInput.value = '';
+            pushInput.focus();
+            return false;
+        }else if(pushNum > 15){
+            alert('15보다 클 수 없습니다.');
+            pushInput.value = '';
+            pushInput.focus();
+            return false;
+        }
+
+        num.innerHTML = pushNum;
+
+        // if(num.innerHTML > pushNum){
+        //     for(var i = 0; i <= num.innerHTML-pushNum; i++){
+        //         num.innerHTML -= 1;
+        //         console.log(num.innerHTML);
+        //     }
+        // }
+    }
+    </script>
+</body>
+</html>
