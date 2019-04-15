@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
+	<title>tab</title>
+	<style>
+	* {margin:0; padding:0;}
+	.numberCounterBox {margin:20px auto; padding:20px; width:100%; max-width:360px; text-align:center; border:4px solid #ccc; box-sizing:border-box;}
+	.numberCounterBox .inputNumber {margin:40px auto; width:300px; font-size:0;}
+	.numberCounterBox .inputNumber input {padding:0 10px; width:75%; height:50px; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; box-sizing:border-box;}
+	.numberCounterBox .inputNumber button {width:25%; height:50px; color:#fff; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; background:#222; box-sizing:border-box;}
+	.numberCounterBox .controlNumber {position:relative; margin:0 auto; width:300px; height:50px;}
+	.numberCounterBox .controlNumber .number {line-height:50px; font-size:40px;}
+	.numberCounterBox .controlNumber .btn {position:absolute; top:0; width:50px; height:50px; font-size:20px; border:3px solid #222; background:#fff;}
+	.numberCounterBox .controlNumber .btn.down {left:0;}
+	.numberCounterBox .controlNumber .btn.up {right:0;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var wrapEl = document.querySelectorAll(".numberCounterBox");// 카운터박스 노드
+			var countEl = document.querySelectorAll(".numberCounterBox > .controlNumber > .btn");// 카운트 버튼 노드
+
+			for (var i = 0; i < wrapEl.length; i++) {
+
+				wrapEl[i].querySelector(".btnConfirm").onclick = function (){// 카운트 입력버튼 클릭
+					var iptNum = this.previousSibling.previousSibling;// 인풋에 입력한 숫자
+					//input에 입력된 숫자를 출력칸에 넣어준다. 0~15가 벗어난 숫자일 경우 alert를 띄워준다.
+					if(iptNum.value > 15){
+						alert("15보다 많을 수 없습니다.");
+					}else if(iptNum.value < 0){
+						alert("0보다 적을 수 없습니다.");
+					}else{
+						this.parentNode.nextSibling.nextSibling.querySelector(".number").innerHTML = iptNum.value;
+					};
+					iptNum.value = "";// 인풋 초기화
+				};
+			};
+			for (var j = 0; j < countEl.length; j++) {
+				countEl[j].onclick = function (){// 카운트 버튼 클릭
+					var countList = this.parentNode.childNodes;// 버튼, 숫자출력 노드 리스트
+					var num = this.parentNode.querySelector(".number").textContent;// 숫자출력 노드 텍스트
+
+					// 카운트 버튼이 down일 경우 -1, up일 경우 +1
+					if(this.className.indexOf("down") != -1){
+						num = parseInt(num) - 1;
+					}else if(this.className.indexOf("up") != -1){
+						num = parseInt(num) + 1;
+					};
+
+					// 0~15사이를 벗어날 경우 alert를 띄워준다.
+					if(num < 0){
+						alert("0보다 적을 수 없습니다.");
+						num = 0;
+					}else if(num > 15){
+						alert("15보다 많을 수 없습니다.");
+						num = 15;
+					};
+
+					this.parentNode.querySelector(".number").innerHTML = num;// 카운트된 숫자를 입력해준다.
+				};
+			};
+		};
+	</script>
+</head>
+<body>
+	<div class="numberCounterBox">
+		<h1>counter</h1>
+		<div class="inputNumber">
+			<input type="number" id="" name="" placeholder="숫자를 입력해주세요.">
+			<button type="button" class="btnConfirm">입력</button>
+		</div>
+		<div class="controlNumber">
+			<button type="button" class="btn down">▼</button>
+			<strong class="number">10</strong>
+			<button type="button" class="btn up">▲</button>
+		</div>
+	</div>
+	<div class="numberCounterBox">
+		<h1>counter</h1>
+		<div class="inputNumber">
+			<input type="number" id="" name="" placeholder="숫자를 입력해주세요.">
+			<button type="button" class="btnConfirm">입력</button>
+		</div>
+		<div class="controlNumber">
+			<button type="button" class="btn down">▼</button>
+			<strong class="number">10</strong>
+			<button type="button" class="btn up">▲</button>
+		</div>
+	</div>
+</body>
+</html>
