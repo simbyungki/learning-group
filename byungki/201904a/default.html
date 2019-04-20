@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>counter UI</title>
+    <style>
+        * {margin:0; padding:0;}
+        #numberCounterBox {margin:20px auto; padding:20px; width:100%; max-width:360px; text-align:center; border:4px solid #ccc; box-sizing:border-box;}
+        #numberCounterBox .inputNumber {margin:40px auto; width:300px; font-size:0;}
+        #numberCounterBox .inputNumber input {padding:0 10px; width:75%; height:50px; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; box-sizing:border-box;}
+        #numberCounterBox .inputNumber button {width:25%; height:50px; color:#fff; font-size:20px; font-weight:bold; vertical-align:middle; border:3px solid #222; background:#222; box-sizing:border-box; cursor:pointer;}
+        #numberCounterBox .controlNumber {position:relative; margin:0 auto; width:300px; height:50px;}
+        #numberCounterBox .controlNumber .number {line-height:50px; font-size:40px;}
+        #numberCounterBox .controlNumber .btn {position:absolute; top:0; width:50px; height:50px; font-size:20px; border:3px solid #222; background:#fff; cursor:pointer;}
+        #numberCounterBox .controlNumber .btn.down {left:0;}
+        #numberCounterBox .controlNumber .btn.up {right:0;}
+    </style>
+</head>
+<body>
+    <div id="numberCounterBox">
+        <h1>counter</h1>
+        <div class="inputNumber">
+            <input type="text" id="" name="" class="inputNum" placeholder="숫자를 입력해주세요.">
+            <button type="button" class="btnConfirm">입력</button>
+        </div>
+        <div class="controlNumber">
+            <button type="button" class="btn down">▼</button>
+            <strong class="number">10</strong>
+            <button type="button" class="btn up">▲</button>
+        </div>
+    </div>
+<script>
+
+//Fn : 현재 값에서 1 더한 값을 return
+function plusNumber(number, maxNum){
+    if(number < maxNum){
+        number += 1;
+    }else{
+        higherNumber(maxNum);
+    }
+    return number;
+}
+//Fn : 현재 값에서 1 뺀 값을 return
+function minusNumber(number, minNum){
+    if(number > minNum){
+        number -= 1;
+    }else{
+        lowerNumber(minNum);
+    }
+    return number;
+}
+
+//Fn : 버튼 클래스 체크 후 빼거나 더한 값 return
+function calculateNumber(thisClassList, number){
+    if(thisClassList.contains('up')){
+        number = plusNumber(number, 15);
+    }else{
+        number = minusNumber(number, 0);
+    }
+    return number;
+}
+//Fn : up, down 버튼 클릭 이벤트
+function clickedHandler(thisClassList, elem){
+    var nowNumber = Number(elem.innerHTML);
+    elem.innerHTML = calculateNumber(thisClassList, nowNumber);
+}
+//Fn : 기준값보다 작을 경우 event
+function lowerNumber(minNum){
+    console.log(minNum + '보다 작을 수 없습니다.');
+}
+//Fn : 기준값보다 클 경우 event
+function higherNumber(maxNum){
+    console.log(maxNum + '보다 클 수 없습니다.');    
+}
+function tempNumber(){
+    alert('숫자를 입력해주세요.');
+}
+
+//Fn : 입력한 숫자 세팅
+function inputNumberSet(setNumber, elem){
+    var $inputBox = document.querySelector('.inputNum');
+    var nowNumber = Number(elem.innerHTML);
+    if(setNumber > 0 && setNumber <= 15){
+        //loop 딜레이를 주기위한 number
+        var i = 0;
+        if(setNumber > nowNumber){
+            while(setNumber >= nowNumber){
+                //loop간 딜레이를 주기 위한 함수
+                countNumber(i, nowNumber, elem);
+                nowNumber++;
+                i++;
+            }
+        }else{
+            while(setNumber <= nowNumber){
+                //loop간 딜레이를 주기 위한 함수
+                countNumber(i, nowNumber, elem);
+                nowNumber--;
+                i++;
+            }
+        }
+    }else if(setNumber < 0){
+        lowerNumber();
+    }else if(setNumber > 15) {
+        higherNumber();        
+    }else {
+        tempNumber();  
+    }
+    $inputBox.value = '';
+    $inputBox.focus();
+}
+//counting number
+//loop간 딜레이를 주기 위한 함수
+function countNumber(i, nowNumber, elem){
+    setTimeout(function(){
+        elem.innerHTML = nowNumber;
+    }, 40 * i);
+}
+
+//Init
+function init(){
+
+    'use strict';
+
+    var controlBtns = document.querySelectorAll('.btn');
+    var inputConfirmBtn = document.querySelector('.btnConfirm');
+    var $numberView = document.querySelector('.number');
+    //마우스 클릭중인지 체크하는 flag
+    var isPressed = false;
+
+    Array.prototype.forEach.call(controlBtns, function(controlBtns){
+        //mousedown, mouseup, mouseout 을 구분하여 이벤트 등록,
+        //mousedown : 마우스가 버튼에 눌러진 상태
+        //mouseup : 누른 뒤 떼어진 후 상태 (버튼 위에서)
+        //mouseout : 누른 뒤 떼어진 후 상태 (버튼 밖에서)
+        controlBtns.addEventListener('mouseup', function(){
+            isPressed = false;
+        });
+        controlBtns.addEventListener('mouseout', function(){
+            isPressed = false;
+        });
+        controlBtns.addEventListener('mousedown', function(){
+            isPressed = true;
+            var thisClassList = this.classList;
+            mousePressingCheck(thisClassList);
+        });
+    });
+
+    //Fn : 마우스가 버튼 클릭 중인지 체크하여 클릭 중일때 clickedHandler 함수 호출
+    function mousePressingCheck(thisClassList){
+        if(isPressed){
+            clickedHandler(thisClassList, $numberView);
+            setTimeout(function(){
+                mousePressingCheck(thisClassList);
+            }, 70);
+        }
+    }
+
+    inputConfirmBtn.addEventListener('click', function(){
+        var $inputBox = document.querySelector('.inputNum');
+        var inputValue = $inputBox.value;
+        inputNumberSet(inputValue, $numberView);
+    });
+
+}
+init();
+</script>
+</body>
+</html>
